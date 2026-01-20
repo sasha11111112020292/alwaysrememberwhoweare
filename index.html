@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Human Rights Advocate's Story</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+        
+        :root {
+            --crimson: #9d174d;
+            --navy: #0f172a;
+            --gold: #fbbf24;
+            --champagne: #fef3c7;
+            --stonewall: #8b5cf6;
+            --paris-blue: #c6e2ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: var(--navy);
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* LOCK TRANSFER BUTTON */
+        .lock-transfer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .lock-btn {
+            background: linear-gradient(45deg, var(--gold), var(--crimson));
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(155, 23, 77, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .lock-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 6px 25px rgba(155, 23, 77, 0.5);
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--champagne);
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--champagne), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(254, 243, 199, 0.7);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        
+        .symbols {
+            font-size: 2.5rem;
+            letter-spacing: 15px;
+            margin: 20px 0;
+            color: var(--gold);
+        }
+        
+        /* ADVICE SECTION - UPDATED WITH MULTIPLE SONGS */
+        .advice-section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background: linear-gradient(135deg, 
+                rgba(30, 41, 59, 0.6), 
+                rgba(139, 92, 246, 0.1));
+            border-radius: 20px;
+            border: 2px dashed rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .advice-section::before {
+            content: "🎵";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 8rem;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .advice-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--paris-blue);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .thoughts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .thoughts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .thoughts-input {
+            min-height: 150px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            color: var(--champagne);
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        
+        .thoughts-input:focus {
+            outline: none;
+            border-color: var(--crimson);
+            box-shadow: 0 0 0 3px rgba(155, 23, 77, 0.2);
+        }
+        
+        /* MULTI-SONG UPLOAD SECTION */
+        .multi-song-upload {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(198, 226, 255, 0.3);
+        }
+        
+        .mp3-title {
+            font-size: 1.1rem;
+            color: var(--paris-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mp3-title::before {
+            content: "🎵";
+        }
+        
+        .mp3-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(198, 226, 255, 0.2);
+            border-radius: 8px;
+            color: var(--champagne);
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        
+        .mp3-input::file-selector-button {
+            background: linear-gradient(45deg, var(--stonewall), var(--paris-blue));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* RANDOM SONG BUTTON */
+        .random-song-btn {
+            background: linear-gradient(45deg, var(--crimson), var(--gold));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .random-song-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 23, 77, 0.3);
+        }
+        
+        .random-song-btn::before {
+            content: "🎲";
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        #currentAudio {
+            margin-top: 10px;
+            color: rgba(254, 243, 199, 0.6);
+            font-size: 0.9rem;
+            min-height: 40px;
+        }
+        
+        .song-list {
+            margin-top: 15px;
+            max-height: 100px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: rgba(254, 243, 199, 0.6);
+        }
+        
+        /* BUTTONS */
+        .save-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .save-btn {
+            background: linear-gradient(45deg, var(--crimson), var(--stonewall));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 23, 77, 0.3);
+        }
+        
+        .save-btn::before {
+            content: "💾";
+        }
+        
+        /* DISPLAY SAVED CONTENT */
+        .saved-content {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .saved-title {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .saved-title::before {
+            content: "📝";
+        }
+        
+        #savedThoughts {
+            color: rgba(254, 243, 199, 0.9);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            min-height: 50px;
+        }
+        
+        /* ADJECTIVES GRID */
+        .adjectives-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(251, 191, 36, 0.2);
+        }
+        
+        .adjectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .adjective-card {
+            background: linear-gradient(
+                145deg,
+                rgba(30, 41, 59, 0.7),
+                rgba(15, 23, 42, 0.9)
+            );
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .adjective-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .adjective-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(var(--crimson), var(--gold));
+        }
+        
+        .adjective-word {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--champagne);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .adjective-number {
+            color: var(--gold);
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-right: 10px;
+        }
+        
+        .receipt {
+            color: rgba(254, 243, 199, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(251, 191, 36, 0.3);
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(251, 191, 36, 0.1);
+        }
+        
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin: 30px 0;
+        }
+        
+        .dreams {
+            color: rgba(254, 243, 199, 0.6);
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+        
+        .stonewall-note {
+            color: rgba(254, 243, 199, 0.4);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .adjective-word { font-size: 1.8rem; }
+            .adjectives-grid { grid-template-columns: 1fr; }
+            .lock-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .advice-section {
+                padding: 25px;
+            }
+            .advice-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOCK TRANSFER BUTTON -->
+    <div class="lock-transfer">
+        <a href="https://sasha11111112020292.github.io/newbeginning/index.html" 
+           target="_blank" 
+           class="lock-btn" 
+           title="Go to Protected Evidence">
+            🔒
+        </a>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1 class="title">Future Human Rights Advocate's Story</h1>
+        <p class="subtitle">Born June 28 · Stonewall 1969 · Still fighting in 2026</p>
+        <div class="symbols">🪶 ❤️ ⚖️</div>
+    </header>
+
+    <!-- ADVICE & MULTI-SONG SECTION -->
+    <section class="advice-section">
+        <h2 class="advice-title">Current Thoughts & Soundtrack</h2>
+        
+        <div class="thoughts-container">
+            <div>
+                <textarea class="thoughts-input" 
+                          id="thoughtsInput" 
+                          placeholder="Write your thoughts here... any advice, reflections, or things you need to remember. This is your space."></textarea>
+            </div>
+            
+            <div class="multi-song-upload">
+                <div class="mp3-title">Upload Multiple Anthems (MP3)</div>
+                <input type="file" 
+                       id="mp3Input" 
+                       class="mp3-input" 
+                       accept="audio/mpeg,audio/*"
+                       multiple>
+                <button class="random-song-btn" id="randomSongBtn">Play Random Song</button>
+                
+                <div class="song-list" id="songList"></div>
+                <div id="currentAudio"></div>
+                <audio controls class="audio-player" id="audioPlayer">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+        
+        <div class="save-buttons">
+            <button class="save-btn" id="saveThoughts">Save Thoughts</button>
+        </div>
+        
+        <div class="saved-content">
+            <div class="saved-title">Saved Thoughts</div>
+            <div id="savedThoughts"></div>
+        </div>
+    </section>
+
+    <!-- ADJECTIVES WITH RECEIPTS -->
+    <section class="adjectives-section">
+        <h2 class="section-title">15 Dimensions with Receipts</h2>
+        <div class="adjectives-grid" id="adjectivesGrid">
+            <!-- Adjectives will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="signature">Yours truly, bisous</div>
+        <div style="font-size: 2rem; margin: 20px 0; color: var(--gold);">💋 😘</div>
+        <div class="dreams">
+            Paris at golden hour ✨ · Human Rights 🕊️ · Language School 🏫 · Love 💕
+        </div>
+        <div class="stonewall-note">
+            June 28, 1969 · Stonewall · 2026 · "C'est vraiment possible!"
+        </div>
+    </footer>
+
+    <script>
+        // ADJECTIVES DATA WITH RECEIPTS
+        const adjectivesData = [
+            {
+                number: 1,
+                word: "Resilient",
+                receipt: "Survived panic attacks in 2025-2026. Attended exam next morning after 9/10 toothache and suicidal ideation. Medical records confirm."
+            },
+            {
+                number: 2,
+                word: "Courageous",
+                receipt: "Confronted teacher with 26-source research paper debunking conversion therapy. Changed classroom curriculum."
+            },
+            {
+                number: 3,
+                word: "Compassionate",
+                receipt: "Researched for a girl who fled to Berlin, compiling 26 sources for someone you never met. 'That's the real consequence.'"
+            },
+            {
+                number: 4,
+                word: "Strategic",
+                receipt: "Sent critical email Monday 9am — not Friday (she forgets), not evening (emotional). Peak professionalism, calculated timing."
+            },
+            {
+                number: 5,
+                word: "Loved",
+                receipt: "Mother: 'I believe in you more than I believe in myself sometimes.' Father drove an hour at 4 AM with suitcase when needed."
+            },
+            {
+                number: 6,
+                word: "Brilliant",
+                receipt: "'Smart Sasha' — highest score in the region. English teacher to your mom: 'He is so smart. I love him so much.'"
+            },
+            {
+                number: 7,
+                word: "Diplomatic",
+                receipt: "'Війни закінчують з повагою до суперника' — told to conversion therapy promoter. Gave teacher chance to save face."
+            },
+            {
+                number: 8,
+                word: "Visionary",
+                receipt: "Dreams of language school 'where people learn to find their voice, not just words.' Paris ✨ Human Rights 🕊️"
+            },
+            {
+                number: 9,
+                word: "Elegant",
+                receipt: "Crimson, navy, gold aesthetic. Premier Jour perfume. Hermès brand. 'Bisous' sign-offs. HTML pages with golden sparkles."
+            },
+            {
+                number: 10,
+                word: "Defiant",
+                receipt: "Born on Stonewall Day. Researched LGBTQ+ issues in conservative environment. 'fuck them all, you still look just as fine.'"
+            },
+            {
+                number: 11,
+                word: "Healing",
+                receipt: "Progress through therapy 2025-2026. Managed panic attacks with new coping skills. 'просити про допомогу — це не слабкість.'"
+            },
+            {
+                number: 12,
+                word: "Authentic",
+                receipt: "Psychiatrist: 'How is it not real if it hurts you so much?' Won't pretend to be someone else for anyone."
+            },
+            {
+                number: 13,
+                word: "Unbreakable",
+                receipt: "After panic attacks, 26-source paper, toothache, exam, psychiatric appointments — still here. Still writing. Still fighting."
+            },
+            {
+                number: 14,
+                word: "Dreamer",
+                receipt: "'Paris ✨, Human Rights 🕊️, Love 💕, Freedom 🦋, Joy ✨' — all while maintaining GPA."
+            },
+            {
+                number: 15,
+                word: "Unforgettable",
+                receipt: "Born Stonewall Day. 26-source conversion therapy exposé. Trilingual. Paris dreams. Human rights mission. The world won't forget."
+            }
+        ];
+
+        // RENDER ADJECTIVES
+        const grid = document.getElementById('adjectivesGrid');
+        
+        adjectivesData.forEach(adj => {
+            const card = document.createElement('div');
+            card.className = 'adjective-card';
+            card.innerHTML = `
+                <div class="adjective-word">
+                    <span class="adjective-number">${adj.number}.</span>
+                    ${adj.word}
+                </div>
+                <div class="receipt">${adj.receipt}</div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // THOUGHTS FUNCTIONALITY
+        const thoughtsInput = document.getElementById('thoughtsInput');
+        const saveThoughtsBtn = document.getElementById('saveThoughts');
+        const savedThoughtsDisplay = document.getElementById('savedThoughts');
+
+        // Load saved thoughts
+        const savedThoughts = localStorage.getItem('advocate_thoughts');
+        if (savedThoughts) {
+            savedThoughtsDisplay.textContent = savedThoughts;
+            thoughtsInput.value = savedThoughts;
+        }
+
+        // Save thoughts
+        saveThoughtsBtn.addEventListener('click', () => {
+            const thoughts = thoughtsInput.value.trim();
+            if (thoughts) {
+                localStorage.setItem('advocate_thoughts', thoughts);
+                savedThoughtsDisplay.textContent = thoughts;
+                
+                // Show confirmation
+                const originalText = saveThoughtsBtn.textContent;
+                saveThoughtsBtn.textContent = "Saved! ✓";
+                saveThoughtsBtn.style.background = "linear-gradient(45deg, #10b981, #059669)";
+                
+                setTimeout(() => {
+                    saveThoughtsBtn.textContent = originalText;
+                    saveThoughtsBtn.style.background = "linear-gradient(45deg, var(--crimson), var(--stonewall))";
+                }, 2000);
+            }
+        });
+
+        // MULTIPLE MP3 UPLOAD & RANDOM PLAY FUNCTIONALITY
+        const mp3Input = document.getElementById('mp3Input');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const currentAudioDisplay = document.getElementById('currentAudio');
+        const randomSongBtn = document.getElementById('randomSongBtn');
+        const songListDisplay = document.getElementById('songList');
+
+        // Load saved songs from localStorage
+        let savedSongs = JSON.parse(localStorage.getItem('advocate_songs')) || [];
+        updateSongList();
+
+        // Handle multiple MP3 upload
+        mp3Input.addEventListener('change', function(event) {
+            const files = Array.from(event.target.files);
+            let newSongsAdded = 0;
+            
+            files.forEach(file => {
+                if (file && file.type.startsWith('audio/')) {
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert(`File "${file.name}" is too large. Please choose MP3s under 10MB.`);
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        // Check if song already exists
+                        const existingIndex = savedSongs.findIndex(song => song.name === file.name);
+                        
+                        if (existingIndex !== -1) {
+                            // Update existing song
+                            savedSongs[existingIndex] = {
+                                name: file.name,
+                                url: e.target.result,
+                                type: file.type,
+                                date: new Date().toLocaleDateString()
+                            };
+                        } else {
+                            // Add new song
+                            savedSongs.push({
+                                name: file.name,
+                                url: e.target.result,
+                                type: file.type,
+                                date: new Date().toLocaleDateString()
+                            });
+                            newSongsAdded++;
+                        }
+                        
+                        // Save to localStorage
+                        localStorage.setItem('advocate_songs', JSON.stringify(savedSongs));
+                        updateSongList();
+                        
+                        if (newSongsAdded > 0) {
+                            currentAudioDisplay.textContent = `Added ${newSongsAdded} new song(s)!`;
+                            currentAudioDisplay.style.color = 'var(--gold)';
+                            setTimeout(() => {
+                                currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
+                            }, 2000);
+                        }
+                    };
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    alert(`File "${file.name}" is not an audio file.`);
+                }
+            });
+            
+            // Clear input
+            this.value = '';
+        });
+
+        // Play random song
+        randomSongBtn.addEventListener('click', () => {
+            if (savedSongs.length === 0) {
+                currentAudioDisplay.textContent = "No songs uploaded yet! Upload some MP3s first.";
+                currentAudioDisplay.style.color = 'var(--crimson)';
+                setTimeout(() => {
+                    currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
+                }, 3000);
+                return;
+            }
+            
+            // Get random song
+            const randomIndex = Math.floor(Math.random() * savedSongs.length);
+            const randomSong = savedSongs[randomIndex];
+            
+            // Play it
+            audioPlayer.src = randomSong.url;
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
+            
+            // Display info
+            currentAudioDisplay.textContent = `Now playing: ${randomSong.name} (added ${randomSong.date})`;
+            currentAudioDisplay.style.color = 'var(--paris-blue)';
+            
+            // Add some fun animation to the button
+            randomSongBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                randomSongBtn.style.transform = '';
+            }, 200);
+        });
+
+        // Update song list display
+        function updateSongList() {
+            if (savedSongs.length === 0) {
+                songListDisplay.innerHTML = 'No songs yet. Upload some!';
+                return;
+            }
+            
+            let html = `<strong>Your Anthem Library (${savedSongs.length} songs):</strong><br>`;
+            savedSongs.forEach((song, index) => {
+                html += `${index + 1}. ${song.name}<br>`;
+            });
+            songListDisplay.innerHTML = html;
+        }
+
+        // LOCK BUTTON ANIMATION
+        const lockBtn = document.querySelector('.lock-btn');
+        lockBtn.addEventListener('mouseenter', () => {
+            lockBtn.style.transform = 'scale(1.1) rotate(15deg)';
+        });
+        
+        lockBtn.addEventListener('mouseleave', () => {
+            lockBtn.style.transform = 'scale(1) rotate(0deg)';
+        });
+
+        // AUTO-SAVE THOUGHTS EVERY 30 SECONDS
+        setInterval(() => {
+            const thoughts = thoughtsInput.value.trim();
+            if (thoughts && thoughts !== localStorage.getItem('advocate_thoughts')) {
+                localStorage.setItem('advocate_thoughts', thoughts);
+                savedThoughtsDisplay.textContent = thoughts;
+            }
+        }, 30000);
+
+        // CONSOLE MESSAGE
+        console.log('%c🔓 Lock button leads to protected evidence', 'color: #fbbf24; font-size: 14px;');
+        console.log('%c💾 Thoughts auto-save every 30 seconds', 'color: #8b5cf6; font-size: 14px;');
+        console.log('%c🎵 Multiple MP3 upload + random play!', 'color: #c6e2ff; font-size: 14px; font-weight: bold;');
+        console.log('%c🎲 Click "Play Random Song" for surprise anthem!', 'color: #fbbf24; font-size: 14px;');
+    </script>
+</body>
+</html>
