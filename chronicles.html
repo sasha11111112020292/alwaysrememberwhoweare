@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicles • Oleksandr Baiurak</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        
+        :root {
+            --paper: #fcfaf6;
+            --ink: #1a1a1a;
+            --sepia: #5c4b37;
+            --gold: #b38b6d;
+            --border: #e8e0d5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'EB Garamond', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            min-height: 100vh;
+        }
+        
+        .paper-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.02"><path d="M0,50 Q25,25 50,50 T100,50" stroke="%235c4b37" fill="none"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            padding-bottom: 50px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .iconic-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 400;
+            color: var(--ink);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .iconic-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.5s ease;
+        }
+        
+        .iconic-title:hover::after {
+            width: 100%;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--sepia);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+        
+        .epigraph {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 25px;
+            font-style: italic;
+            color: var(--sepia);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            line-height: 1.8;
+        }
+        
+        .form-section {
+            background: rgba(232, 224, 213, 0.1);
+            padding: 40px;
+            border: 1px solid var(--border);
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .form-section::before {
+            content: "✒";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: rgba(179, 139, 109, 0.1);
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--sepia);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            color: var(--ink);
+            font-family: 'EB Garamond', serif;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            resize: vertical;
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            line-height: 1.8;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-bottom-color: var(--gold);
+        }
+        
+        .file-upload {
+            margin: 30px 0;
+        }
+        
+        .file-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--sepia);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .file-label:hover {
+            border-color: var(--gold);
+            color: var(--ink);
+        }
+        
+        .button {
+            background: transparent;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            padding: 14px 35px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(179, 139, 109, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .button:hover::before {
+            left: 100%;
+        }
+        
+        .button:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+        
+        .evidence-grid {
+            margin: 50px 0;
+        }
+        
+        .evidence-card {
+            background: var(--paper);
+            padding: 35px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .evidence-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        
+        .evidence-text {
+            font-size: 1.3rem;
+            color: var(--ink);
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-style: italic;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .evidence-text::before {
+            content: "“";
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-size: 3rem;
+            color: rgba(179, 139, 109, 0.3);
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .evidence-meta {
+            font-size: 0.9rem;
+            color: var(--sepia);
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: transparent;
+            color: var(--sepia);
+            padding: 4px 12px;
+            border: 1px solid var(--border);
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .random-display {
+            display: none;
+            background: rgba(232, 224, 213, 0.2);
+            padding: 40px;
+            border: 1px solid var(--gold);
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--sepia);
+        }
+        
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: var(--ink);
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .back-link a {
+            color: var(--sepia);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link a:hover {
+            color: var(--ink);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .iconic-title {
+                font-size: 3rem;
+            }
+            
+            .form-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="paper-texture"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="iconic-title">CHRONICLES</h1>
+            <div class="subtitle">of Oleksandr Baiurak</div>
+            
+            <div class="epigraph">
+                An archive of evidence, remembrance, and testament. 
+                Each entry is proof that some stories must be preserved.
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 40px; 
+                        font-size: 0.9rem; color: var(--sepia); 
+                        text-transform: uppercase; letter-spacing: 0.5px;">
+                <div>Volume I</div>
+                <div>•</div>
+                <div>Est. 2026</div>
+                <div>•</div>
+                <div>Digital Archive</div>
+            </div>
+        </header>
+
+        <section class="form-section">
+            <h2 class="form-title">Add to the Chronicles</h2>
+            
+            <div class="form-group">
+                <label class="form-label">The Evidence</label>
+                <textarea class="form-textarea" id="evidenceText" 
+                          placeholder="What was witnessed, remembered, or documented..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Source</label>
+                <input type="text" class="form-input" id="evidenceSource" 
+                       placeholder="Who said it? Where was it found?">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Tags</label>
+                <input type="text" class="form-input" id="evidenceTags" 
+                       placeholder="#remembered #impact #evidence">
+            </div>
+            
+            <div class="file-upload">
+                <label class="file-label" for="fileInput">
+                    📎 Attach files (images, videos)
+                </label>
+                <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display: none;">
+                <div id="filePreview" style="margin-top: 15px; font-size: 0.9rem; color: var(--sepia);"></div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <button class="button" id="saveEvidence">
+                    <span>📝</span>
+                    Archive This Entry
+                </button>
+                
+                <button class="button" id="randomBtn" style="margin-left: 20px;">
+                    <span>✨</span>
+                    Show Random Entry
+                </button>
+                
+                <a href="drive.html" class="button" style="margin-left: 20px; text-decoration: none;">
+                    <span>☁️</span>
+                    Drive Archive
+                </a>
+            </div>
+            
+            <div style="margin-top: 30px; font-size: 0.9rem; color: var(--sepia);">
+                <button class="button" id="exportArchiveBtn" style="padding: 10px 20px; font-size: 1rem;">
+                    <span>📤</span>
+                    Export Entire Archive
+                </button>
+                <button class="button" id="importArchiveBtn" style="padding: 10px 20px; font-size: 1rem; margin-left: 10px;">
+                    <span>📥</span>
+                    Import Archive
+                </button>
+            </div>
+        </section>
+
+        <div class="random-display" id="randomDisplay"></div>
+
+        <section class="evidence-grid" id="evidenceGrid">
+            <div style="text-align: center; padding: 60px 40px; color: var(--sepia); font-style: italic;">
+                The Chronicles await their first entry.
+            </div>
+        </section>
+
+        <div class="back-link">
+            <a href="index.html">← Return to Main Story</a>
+        </div>
+
+        <div class="footer">
+            <div class="signature">𝒪𝓁𝑒𝓀𝓈𝒶𝓃𝒹𝓇 𝐵𝒶𝒾𝓊𝓇𝒶𝓀</div>
+            <div style="font-size: 0.9rem; letter-spacing: 0.5px; margin-top: 10px;">
+                Chronicles preserved across time and space
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database setup
+        const DB_NAME = 'ChroniclesDB';
+        const DB_VERSION = 1;
+        const EVIDENCE_STORE = 'evidence';
+        let db;
+        let evidenceEntries = [];
+        const DRIVE_FOLDER_ID = '1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN';
+
+        // Initialize database
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                
+                request.onerror = () => {
+                    console.error('Database error:', request.error);
+                    loadFromLocalStorage();
+                    resolve(false);
+                };
+                
+                request.onsuccess = (event) => {
+                    db = event.target.result;
+                    loadAllEvidence();
+                    resolve(true);
+                };
+                
+                request.onupgradeneeded = (event) => {
+                    db = event.target.result;
+                    if (!db.objectStoreNames.contains(EVIDENCE_STORE)) {
+                        const store = db.createObjectStore(EVIDENCE_STORE, { keyPath: 'id', autoIncrement: true });
+                        store.createIndex('date', 'date', { unique: false });
+                    }
+                };
+            });
+        }
+
+        // Load all evidence
+        async function loadAllEvidence() {
+            if (!db) {
+                const saved = localStorage.getItem('chronicles_evidence');
+                evidenceEntries = saved ? JSON.parse(saved) : [];
+                renderEvidence();
+                return;
+            }
+            
+            const transaction = db.transaction([EVIDENCE_STORE], 'readonly');
+            const store = transaction.objectStore(EVIDENCE_STORE);
+            const request = store.getAll();
+            
+            request.onsuccess = () => {
+                evidenceEntries = request.result || [];
+                renderEvidence();
+            };
+        }
+
+        // Save evidence
+        async function saveEvidence(evidence) {
+            if (!db) {
+                evidenceEntries.unshift(evidence);
+                localStorage.setItem('chronicles_evidence', JSON.stringify(evidenceEntries));
+                return evidence;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([EVIDENCE_STORE], 'readwrite');
+                const store = transaction.objectStore(EVIDENCE_STORE);
+                const request = store.add(evidence);
+                
+                request.onsuccess = () => {
+                    evidence.id = request.result;
+                    evidenceEntries.unshift(evidence);
+                    resolve(evidence);
+                };
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Save evidence button
+        document.getElementById('saveEvidence').addEventListener('click', async () => {
+            const text = document.getElementById('evidenceText').value.trim();
+            const source = document.getElementById('evidenceSource').value.trim();
+            const tags = document.getElementById('evidenceTags').value.trim();
+            
+            if (!text) {
+                alert("Please provide evidence text.");
+                return;
+            }
+            
+            const fileInput = document.getElementById('fileInput');
+            const media = [];
+            
+            if (fileInput.files.length > 0) {
+                for (const file of fileInput.files) {
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert(`File "${file.name}" is too large (max 10MB)`);
+                        continue;
+                    }
+                    
+                    const dataURL = await new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    });
+                    
+                    media.push({
+                        name: file.name,
+                        type: file.type,
+                        data: dataURL,
+                        size: file.size
+                    });
+                }
+            }
+            
+            const newEntry = {
+                text: text,
+                source: source || 'Anonymous',
+                tags: tags || '#evidence',
+                date: new Date().toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                timestamp: Date.now(),
+                media: media
+            };
+            
+            try {
+                await saveEvidence(newEntry);
+                renderEvidence();
+                
+                // Clear form
+                document.getElementById('evidenceText').value = '';
+                document.getElementById('evidenceSource').value = '';
+                document.getElementById('evidenceTags').value = '';
+                document.getElementById('fileInput').value = '';
+                document.getElementById('filePreview').innerHTML = '';
+                
+                // Show confirmation
+                const btn = document.getElementById('saveEvidence');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<span>✓</span> Archived';
+                setTimeout(() => btn.innerHTML = original, 2000);
+                
+            } catch (error) {
+                console.error('Save error:', error);
+                alert('Error saving evidence.');
+            }
+        });
+
+        // Random evidence
+        document.getElementById('randomBtn').addEventListener('click', () => {
+            if (evidenceEntries.length === 0) {
+                alert("No entries yet.");
+                return;
+            }
+            
+            const randomEntry = evidenceEntries[Math.floor(Math.random() * evidenceEntries.length)];
+            const display = document.getElementById('randomDisplay');
+            
+            let mediaHTML = '';
+            if (randomEntry.media && randomEntry.media.length > 0) {
+                const media = randomEntry.media[0];
+                if (media.type.startsWith('image/')) {
+                    mediaHTML = `<img src="${media.data}" style="max-width: 300px; margin: 20px auto; border: 1px solid var(--border); display: block;">`;
+                }
+            }
+            
+            display.innerHTML = `
+                <div style="font-size: 1.5rem; color: var(--sepia); margin-bottom: 20px; letter-spacing: 1px;">
+                    Random Chronicle
+                </div>
+                <div style="font-size: 1.4rem; line-height: 1.8; font-style: italic; margin-bottom: 25px;">
+                    "${randomEntry.text}"
+                </div>
+                ${mediaHTML}
+                <div style="color: var(--sepia); margin: 20px 0;">
+                    <div><strong>From:</strong> ${randomEntry.source}</div>
+                    <div style="margin: 10px 0;">
+                        ${randomEntry.tags.split(' ').map(tag => 
+                            `<span class="tag" style="margin: 5px;">${tag}</span>`
+                        ).join('')}
+                    </div>
+                    <div style="font-size: 0.9rem; margin-top: 15px;">
+                        ${randomEntry.date}
+                    </div>
+                </div>
+            `;
+            display.style.display = 'block';
+            display.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Render evidence grid
+        function renderEvidence() {
+            const grid = document.getElementById('evidenceGrid');
+            
+            if (evidenceEntries.length === 0) {
+                grid.innerHTML = `
+                    <div style="text-align: center; padding: 60px 40px; color: var(--sepia); font-style: italic;">
+                        The Chronicles await their first entry.
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = '';
+            evidenceEntries.forEach(entry => {
+                const card = document.createElement('div');
+                card.className = 'evidence-card';
+                
+                let mediaHTML = '';
+                if (entry.media && entry.media.length > 0) {
+                    entry.media.forEach(media => {
+                        if (media.type.startsWith('image/')) {
+                            mediaHTML += `<img src="${media.data}" style="max-width: 100%; margin: 15px 0; border: 1px solid var(--border);">`;
+                        }
+                    });
+                }
+                
+                card.innerHTML = `
+                    <div class="evidence-text">${entry.text}</div>
+                    ${mediaHTML}
+                    <div class="evidence-meta">
+                        <div style="margin-bottom: 15px;">
+                            ${entry.tags.split(' ').map(tag => 
+                                `<span class="tag">${tag}</span>`
+                            ).join('')}
+                        </div>
+                        <div style="color: var(--sepia);">
+                            <div style="margin-bottom: 8px;"><strong>Source:</strong> ${entry.source}</div>
+                            <div>${entry.date}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Export archive
+        document.getElementById('exportArchiveBtn').addEventListener('click', async () => {
+            try {
+                const exportData = {
+                    version: 1,
+                    timestamp: new Date().toISOString(),
+                    entries: evidenceEntries,
+                    stats: {
+                        totalEntries: evidenceEntries.length,
+                        exportDate: new Date().toLocaleString()
+                    }
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `chronicles-archive-${Date.now()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('✅ Archive exported! Save this file to Google Drive to sync across devices.');
+                
+            } catch (error) {
+                console.error('Export error:', error);
+                alert('Export failed.');
+            }
+        });
+
+        // Import archive
+        document.getElementById('importArchiveBtn').addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json,application/json';
+            
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    
+                    if (!data.entries || !Array.isArray(data.entries)) {
+                        throw new Error('Invalid archive file');
+                    }
+                    
+                    if (confirm(`Import ${data.entries.length} entries? This will add to your existing archive.`)) {
+                        // Clear existing data first if needed
+                        if (db) {
+                            const transaction = db.transaction([EVIDENCE_STORE], 'readwrite');
+                            const store = transaction.objectStore(EVIDENCE_STORE);
+                            store.clear();
+                        }
+                        
+                        evidenceEntries = data.entries;
+                        
+                        // Save each entry
+                        for (const entry of evidenceEntries) {
+                            await saveEvidence(entry);
+                        }
+                        
+                        renderEvidence();
+                        alert(`✅ Imported ${data.entries.length} entries!`);
+                    }
+                    
+                } catch (error) {
+                    console.error('Import error:', error);
+                    alert('Import failed. Invalid file format.');
+                }
+            };
+            
+            input.click();
+        });
+
+        // File preview
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const preview = document.getElementById('filePreview');
+            preview.innerHTML = '';
+            
+            Array.from(e.target.files).forEach(file => {
+                const div = document.createElement('div');
+                div.style.cssText = 'margin: 5px; padding: 5px 10px; background: rgba(232, 224, 213, 0.3); border-radius: 4px; display: inline-block;';
+                div.textContent = `📎 ${file.name}`;
+                preview.appendChild(div);
+            });
+        });
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initDB();
+            
+            // Show sync info
+            setTimeout(() => {
+                const notification = document.createElement('div');
+                notification.innerHTML = `
+                    <div style="position: fixed; top: 100px; right: 20px; background: #4285f4; color: white; padding: 20px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 9999; max-width: 400px; border-left: 5px solid #34a853;">
+                        <div style="display: flex; align-items: flex-start; gap: 15px;">
+                            <div style="font-size: 1.5rem;">☁️</div>
+                            <div style="flex: 1;">
+                                <strong>Sync across devices:</strong><br>
+                                Export archive → Save to <a href="https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}" target="_blank" style="color: white; text-decoration: underline;">Google Drive</a> → Import on other devices
+                            </div>
+                            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;">×</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (notification.parentNode) notification.remove();
+                }, 15000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

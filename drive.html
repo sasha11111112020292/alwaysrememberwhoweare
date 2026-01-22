@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Archive • Chronicles</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        
+        :root {
+            --paper: #fcfaf6;
+            --ink: #1a1a1a;
+            --sepia: #5c4b37;
+            --gold: #b38b6d;
+            --border: #e8e0d5;
+            --drive-blue: #4285f4;
+            --drive-green: #34a853;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'EB Garamond', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .paper-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.02"><path d="M0,50 Q25,25 50,50 T100,50" stroke="%235c4b37" fill="none"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .drive-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--sepia);
+            font-weight: 300;
+        }
+        
+        .drive-card {
+            background: rgba(232, 224, 213, 0.1);
+            border: 2px solid var(--border);
+            padding: 50px 40px;
+            margin: 40px 0;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+        }
+        
+        .drive-card:hover {
+            border-color: var(--drive-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .drive-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            color: var(--drive-blue);
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            color: var(--ink);
+            margin-bottom: 20px;
+        }
+        
+        .card-description {
+            color: var(--sepia);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .drive-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--drive-blue);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.3rem;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .drive-button:hover {
+            background: #3367d6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
+        }
+        
+        .instructions {
+            margin-top: 50px;
+            padding: 40px;
+            border-top: 1px solid var(--border);
+            text-align: left;
+            background: rgba(232, 224, 213, 0.05);
+            border-radius: 10px;
+        }
+        
+        .instructions-title {
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--drive-green);
+        }
+        
+        .step-number {
+            background: var(--drive-green);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .back-link {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .back-link a {
+            color: var(--sepia);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .back-link a:hover {
+            color: var(--ink);
+        }
+        
+        .footer {
+            margin-top: 60px;
+            color: var(--sepia);
+            font-size: 0.9rem;
+        }
+        
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: var(--ink);
+        }
+        
+        @media (max-width: 768px) {
+            .drive-title {
+                font-size: 2.5rem;
+            }
+            
+            .drive-card {
+                padding: 30px 20px;
+            }
+            
+            .drive-button {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="paper-texture"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="drive-title">Drive Archive</h1>
+            <div class="subtitle">Cloud storage for the Chronicles</div>
+        </header>
+        
+        <main>
+            <div class="drive-card">
+                <div class="drive-icon">☁️</div>
+                <h2 class="card-title">Google Drive Folder</h2>
+                <p class="card-description">
+                    Your complete archive is stored securely in Google Drive. 
+                    Access it from any device, upload new evidence directly, 
+                    or download files for safekeeping.
+                </p>
+                
+                <a href="https://drive.google.com/drive/folders/1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN" 
+                   target="_blank" 
+                   class="drive-button">
+                    <span>📂</span>
+                    Open Archive Folder
+                </a>
+                
+                <a href="https://drive.google.com/drive/folders/1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN?sort=13&direction=a" 
+                   target="_blank" 
+                   class="drive-button"
+                   style="background: var(--drive-green);">
+                    <span>📤</span>
+                    Upload New Files
+                </a>
+            </div>
+            
+            <div class="instructions">
+                <h3 class="instructions-title">How to Sync Across Devices</h3>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Export Your Archive</div>
+                        <div>Go to the <a href="chronicles.html" style="color: var(--drive-blue);">Chronicles page</a> and click "Export Entire Archive". This downloads a .json file with all your evidence.</div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Save to Google Drive</div>
+                        <div>Upload the downloaded .json file to your <a href="https://drive.google.com/drive/folders/1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN" target="_blank" style="color: var(--drive-blue);">Drive Folder</a>. This makes it accessible from any device.</div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Import on Another Device</div>
+                        <div>On another device, download the .json file from Drive, go to Chronicles, and click "Import Archive". Select the file - everything will appear.</div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Auto-Sync (Optional)</div>
+                        <div>Install Google Drive desktop app for automatic sync. Files added to the folder will automatically appear on all your devices.</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="back-link">
+            <a href="chronicles.html">
+                <span>←</span>
+                Back to Chronicles
+            </a>
+        </div>
+        
+        <div class="footer">
+            <div class="signature">𝒪𝓁𝑒𝓀𝓈𝒶𝓃𝒹𝓇 𝐵𝒶𝒾𝓊𝓇𝒶𝓀</div>
+            <div>Archives preserved across time and space</div>
+        </div>
+    </div>
+    
+    <script>
+        // Add animations
+        const driveCard = document.querySelector('.drive-card');
+        driveCard.addEventListener('mouseenter', () => {
+            driveCard.style.transform = 'translateY(-5px)';
+        });
+        
+        driveCard.addEventListener('mouseleave', () => {
+            driveCard.style.transform = 'translateY(0)';
+        });
+        
+        // Console message
+        console.log('%c🗂️ Drive Archive connected', 'color: #4285f4; font-size: 14px;');
+        console.log('%c📁 Folder ID: 1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN', 'color: #34a853; font-size: 12px;');
+    </script>
+</body>
+</html>

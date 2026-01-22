@@ -259,6 +259,7 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
         
         .save-btn {
@@ -279,10 +280,6 @@
         .save-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(155, 23, 77, 0.3);
-        }
-        
-        .save-btn::before {
-            content: "💾";
         }
         
         /* DISPLAY SAVED CONTENT */
@@ -391,6 +388,95 @@
             border-left: 2px solid rgba(251, 191, 36, 0.3);
         }
         
+        /* CHRONICLES LINK SECTION */
+        .chronicles-section {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(251, 191, 36, 0.1);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chronicles-section::before {
+            content: "📜";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 8rem;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .chronicles-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--champagne);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-style: italic;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .chronicles-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            padding: 18px 45px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            background: linear-gradient(45deg, 
+                rgba(155, 23, 77, 0.1), 
+                rgba(139, 92, 246, 0.1));
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .chronicles-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: linear-gradient(45deg, 
+                rgba(155, 23, 77, 0.2), 
+                rgba(139, 92, 246, 0.2));
+            box-shadow: 0 10px 30px rgba(155, 23, 77, 0.2);
+        }
+        
+        .chronicles-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(251, 191, 36, 0.1), 
+                transparent);
+            transition: 0.6s;
+        }
+        
+        .chronicles-link:hover::before {
+            left: 100%;
+        }
+        
+        .chronicles-note {
+            color: rgba(254, 243, 199, 0.5);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            margin-top: 15px;
+        }
+        
         /* FOOTER */
         .footer {
             text-align: center;
@@ -418,6 +504,38 @@
             margin-top: 30px;
         }
         
+        /* NOTIFICATION STYLES */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        #syncNotification {
+            animation: slideIn 0.3s ease-out;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.5;
+        }
+        
+        #syncNotification a {
+            color: var(--gold) !important;
+            text-decoration: underline !important;
+            font-weight: bold;
+        }
+        
+        #syncNotification button {
+            transition: transform 0.2s ease;
+        }
+        
+        #syncNotification button:hover {
+            transform: scale(1.2);
+        }
+        
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .title { font-size: 2.5rem; }
@@ -434,6 +552,23 @@
             }
             .advice-title {
                 font-size: 2rem;
+            }
+            .chronicles-section {
+                padding: 40px 25px;
+            }
+            .chronicles-quote {
+                font-size: 1.5rem;
+            }
+            .chronicles-link {
+                font-size: 1.3rem;
+                padding: 15px 30px;
+            }
+            .save-buttons {
+                flex-direction: column;
+            }
+            .save-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -486,6 +621,19 @@
         
         <div class="save-buttons">
             <button class="save-btn" id="saveThoughts">Save Thoughts</button>
+            <button class="save-btn" id="clearData" style="background: linear-gradient(45deg, var(--stonewall), var(--paris-blue));">
+                🗑️ Clear All Data
+            </button>
+            <!-- SYNC BUTTONS -->
+            <button class="save-btn" id="exportData" style="background: linear-gradient(45deg, #10b981, #059669);">
+                📤 Export ALL Data
+            </button>
+            <button class="save-btn" id="importData" style="background: linear-gradient(45deg, #f59e0b, #d97706);">
+                📥 Import Data
+            </button>
+            <button class="save-btn" id="driveSyncBtn" style="background: linear-gradient(45deg, #4285f4, #34a853);">
+                ☁️ Sync to Drive
+            </button>
         </div>
         
         <div class="saved-content">
@@ -502,6 +650,23 @@
         </div>
     </section>
 
+    <!-- CHRONICLES ARCHIVE LINK -->
+    <section class="chronicles-section">
+        <div class="chronicles-quote">
+            "What must be remembered, shall be recorded. Evidence preserved is history reclaimed."
+        </div>
+        
+        <a href="chronicles.html" class="chronicles-link">
+            <span>📜</span>
+            Enter the Chronicles
+            <span style="font-size: 1.2rem; opacity: 0.7; margin-left: 10px;">→</span>
+        </a>
+        
+        <div class="chronicles-note">
+            A timeless archive of evidence, remembrance, and testament
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="signature">Yours truly, bisous</div>
@@ -515,7 +680,9 @@
     </footer>
 
     <script>
-        // ADJECTIVES DATA WITH RECEIPTS
+        // =====================
+        // FIXED ADJECTIVES DATA
+        // =====================
         const adjectivesData = [
             {
                 number: 1,
@@ -525,7 +692,7 @@
             {
                 number: 2,
                 word: "Courageous",
-                receipt: "Confronted teacher with 26-source research paper debunking conversion therapy. Changed classroom curriculum."
+                receipt: "Confronted teacher with 26-source research paper debunking conversion therapy. Presented evidence that couldn't be ignored."
             },
             {
                 number: 3,
@@ -594,9 +761,160 @@
             }
         ];
 
-        // RENDER ADJECTIVES
-        const grid = document.getElementById('adjectivesGrid');
+        // =====================
+        // PERSISTENT STORAGE
+        // =====================
+        const DB_NAME = 'AdvocateArchiveDB';
+        const DB_VERSION = 1;
+        const AUDIO_STORE = 'audioFiles';
+        const THOUGHTS_STORE = 'thoughts';
         
+        let db;
+        let savedSongs = [];
+
+        // Initialize IndexedDB
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                
+                request.onerror = () => {
+                    console.error('IndexedDB error:', request.error);
+                    loadFromLocalStorage();
+                    resolve(false);
+                };
+                
+                request.onsuccess = (event) => {
+                    db = event.target.result;
+                    console.log('IndexedDB initialized');
+                    loadAllData();
+                    resolve(true);
+                };
+                
+                request.onupgradeneeded = (event) => {
+                    db = event.target.result;
+                    if (!db.objectStoreNames.contains(AUDIO_STORE)) {
+                        const audioStore = db.createObjectStore(AUDIO_STORE, { keyPath: 'id', autoIncrement: true });
+                        audioStore.createIndex('name', 'name', { unique: false });
+                    }
+                    if (!db.objectStoreNames.contains(THOUGHTS_STORE)) {
+                        db.createObjectStore(THOUGHTS_STORE, { keyPath: 'id' });
+                    }
+                };
+            });
+        }
+
+        // Load all data
+        async function loadAllData() {
+            const thoughts = await getThoughts();
+            if (thoughts) {
+                thoughtsInput.value = thoughts.text || '';
+                savedThoughtsDisplay.textContent = thoughts.text || '';
+            }
+            
+            savedSongs = await getAllSongs();
+            updateSongList();
+        }
+
+        // Fallback to localStorage
+        function loadFromLocalStorage() {
+            const savedThoughts = localStorage.getItem('advocate_thoughts');
+            if (savedThoughts) {
+                thoughtsInput.value = savedThoughts;
+                savedThoughtsDisplay.textContent = savedThoughts;
+            }
+            
+            const songs = localStorage.getItem('advocate_songs');
+            if (songs) {
+                savedSongs = JSON.parse(songs) || [];
+                updateSongList();
+            }
+        }
+
+        // Save thoughts to DB
+        async function saveThoughtsToDB(text) {
+            if (!db) {
+                localStorage.setItem('advocate_thoughts', text);
+                return;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([THOUGHTS_STORE], 'readwrite');
+                const store = transaction.objectStore(THOUGHTS_STORE);
+                const request = store.put({ id: 'current_thoughts', text: text, timestamp: Date.now() });
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Get thoughts from DB
+        async function getThoughts() {
+            if (!db) {
+                const text = localStorage.getItem('advocate_thoughts');
+                return text ? { text } : null;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([THOUGHTS_STORE], 'readonly');
+                const store = transaction.objectStore(THOUGHTS_STORE);
+                const request = store.get('current_thoughts');
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Save song to DB
+        async function saveSongToDB(songData) {
+            if (!db) {
+                savedSongs.push(songData);
+                localStorage.setItem('advocate_songs', JSON.stringify(savedSongs));
+                return songData;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([AUDIO_STORE], 'readwrite');
+                const store = transaction.objectStore(AUDIO_STORE);
+                const request = store.add(songData);
+                request.onsuccess = () => {
+                    songData.id = request.result;
+                    resolve(songData);
+                };
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Get all songs from DB
+        async function getAllSongs() {
+            if (!db) {
+                const songs = localStorage.getItem('advocate_songs');
+                return songs ? JSON.parse(songs) : [];
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([AUDIO_STORE], 'readonly');
+                const store = transaction.objectStore(AUDIO_STORE);
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // =====================
+        // DOM ELEMENTS
+        // =====================
+        const grid = document.getElementById('adjectivesGrid');
+        const thoughtsInput = document.getElementById('thoughtsInput');
+        const saveThoughtsBtn = document.getElementById('saveThoughts');
+        const savedThoughtsDisplay = document.getElementById('savedThoughts');
+        const clearDataBtn = document.getElementById('clearData');
+        const mp3Input = document.getElementById('mp3Input');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const currentAudioDisplay = document.getElementById('currentAudio');
+        const randomSongBtn = document.getElementById('randomSongBtn');
+        const songListDisplay = document.getElementById('songList');
+
+        // =====================
+        // RENDER ADJECTIVES
+        // =====================
         adjectivesData.forEach(adj => {
             const card = document.createElement('div');
             card.className = 'adjective-card';
@@ -610,112 +928,102 @@
             grid.appendChild(card);
         });
 
+        // =====================
         // THOUGHTS FUNCTIONALITY
-        const thoughtsInput = document.getElementById('thoughtsInput');
-        const saveThoughtsBtn = document.getElementById('saveThoughts');
-        const savedThoughtsDisplay = document.getElementById('savedThoughts');
-
-        // Load saved thoughts
-        const savedThoughts = localStorage.getItem('advocate_thoughts');
-        if (savedThoughts) {
-            savedThoughtsDisplay.textContent = savedThoughts;
-            thoughtsInput.value = savedThoughts;
-        }
-
-        // Save thoughts
-        saveThoughtsBtn.addEventListener('click', () => {
+        // =====================
+        saveThoughtsBtn.addEventListener('click', async () => {
             const thoughts = thoughtsInput.value.trim();
             if (thoughts) {
-                localStorage.setItem('advocate_thoughts', thoughts);
-                savedThoughtsDisplay.textContent = thoughts;
-                
-                // Show confirmation
-                const originalText = saveThoughtsBtn.textContent;
-                saveThoughtsBtn.textContent = "Saved! ✓";
-                saveThoughtsBtn.style.background = "linear-gradient(45deg, #10b981, #059669)";
-                
-                setTimeout(() => {
-                    saveThoughtsBtn.textContent = originalText;
-                    saveThoughtsBtn.style.background = "linear-gradient(45deg, var(--crimson), var(--stonewall))";
-                }, 2000);
+                try {
+                    await saveThoughtsToDB(thoughts);
+                    savedThoughtsDisplay.textContent = thoughts;
+                    
+                    const originalText = saveThoughtsBtn.textContent;
+                    saveThoughtsBtn.textContent = "Saved! ✓";
+                    saveThoughtsBtn.style.background = "linear-gradient(45deg, #10b981, #059669)";
+                    
+                    setTimeout(() => {
+                        saveThoughtsBtn.textContent = originalText;
+                        saveThoughtsBtn.style.background = "linear-gradient(45deg, var(--crimson), var(--stonewall))";
+                    }, 2000);
+                } catch (error) {
+                    alert('Error saving thoughts.');
+                }
             }
         });
 
-        // MULTIPLE MP3 UPLOAD & RANDOM PLAY FUNCTIONALITY
-        const mp3Input = document.getElementById('mp3Input');
-        const audioPlayer = document.getElementById('audioPlayer');
-        const currentAudioDisplay = document.getElementById('currentAudio');
-        const randomSongBtn = document.getElementById('randomSongBtn');
-        const songListDisplay = document.getElementById('songList');
+        // Clear all data
+        clearDataBtn.addEventListener('click', async () => {
+            if (confirm("Are you sure you want to clear ALL saved data? This cannot be undone.")) {
+                if (db) {
+                    const transaction = db.transaction([AUDIO_STORE, THOUGHTS_STORE], 'readwrite');
+                    transaction.objectStore(AUDIO_STORE).clear();
+                    transaction.objectStore(THOUGHTS_STORE).clear();
+                }
+                localStorage.clear();
+                savedSongs = [];
+                thoughtsInput.value = '';
+                savedThoughtsDisplay.textContent = '';
+                updateSongList();
+                alert("All data cleared.");
+            }
+        });
 
-        // Load saved songs from localStorage
-        let savedSongs = JSON.parse(localStorage.getItem('advocate_songs')) || [];
-        updateSongList();
-
-        // Handle multiple MP3 upload
-        mp3Input.addEventListener('change', function(event) {
+        // =====================
+        // AUDIO FUNCTIONALITY
+        // =====================
+        mp3Input.addEventListener('change', async function(event) {
             const files = Array.from(event.target.files);
             let newSongsAdded = 0;
             
-            files.forEach(file => {
+            for (const file of files) {
                 if (file && file.type.startsWith('audio/')) {
-                    if (file.size > 10 * 1024 * 1024) {
-                        alert(`File "${file.name}" is too large. Please choose MP3s under 10MB.`);
-                        return;
+                    if (file.size > 50 * 1024 * 1024) {
+                        alert(`File "${file.name}" is too large (max 50MB).`);
+                        continue;
                     }
                     
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        // Check if song already exists
-                        const existingIndex = savedSongs.findIndex(song => song.name === file.name);
-                        
-                        if (existingIndex !== -1) {
-                            // Update existing song
-                            savedSongs[existingIndex] = {
+                    try {
+                        const reader = new FileReader();
+                        const songData = await new Promise((resolve, reject) => {
+                            reader.onload = (e) => resolve({
                                 name: file.name,
                                 url: e.target.result,
                                 type: file.type,
-                                date: new Date().toLocaleDateString()
-                            };
-                        } else {
-                            // Add new song
-                            savedSongs.push({
-                                name: file.name,
-                                url: e.target.result,
-                                type: file.type,
-                                date: new Date().toLocaleDateString()
+                                size: file.size,
+                                date: new Date().toLocaleDateString(),
+                                timestamp: Date.now()
                             });
-                            newSongsAdded++;
-                        }
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        });
                         
-                        // Save to localStorage
-                        localStorage.setItem('advocate_songs', JSON.stringify(savedSongs));
-                        updateSongList();
+                        await saveSongToDB(songData);
+                        savedSongs.push(songData);
+                        newSongsAdded++;
                         
-                        if (newSongsAdded > 0) {
-                            currentAudioDisplay.textContent = `Added ${newSongsAdded} new song(s)!`;
-                            currentAudioDisplay.style.color = 'var(--gold)';
-                            setTimeout(() => {
-                                currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
-                            }, 2000);
-                        }
-                    };
-                    
-                    reader.readAsDataURL(file);
-                } else {
-                    alert(`File "${file.name}" is not an audio file.`);
+                    } catch (error) {
+                        console.error('Error processing file:', error);
+                    }
                 }
-            });
+            }
             
-            // Clear input
+            if (newSongsAdded > 0) {
+                updateSongList();
+                currentAudioDisplay.textContent = `Added ${newSongsAdded} new song(s)!`;
+                currentAudioDisplay.style.color = 'var(--gold)';
+                setTimeout(() => {
+                    currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
+                }, 2000);
+            }
+            
             this.value = '';
         });
 
         // Play random song
         randomSongBtn.addEventListener('click', () => {
             if (savedSongs.length === 0) {
-                currentAudioDisplay.textContent = "No songs uploaded yet! Upload some MP3s first.";
+                currentAudioDisplay.textContent = "No songs uploaded yet!";
                 currentAudioDisplay.style.color = 'var(--crimson)';
                 setTimeout(() => {
                     currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
@@ -723,64 +1031,263 @@
                 return;
             }
             
-            // Get random song
             const randomIndex = Math.floor(Math.random() * savedSongs.length);
             const randomSong = savedSongs[randomIndex];
             
-            // Play it
             audioPlayer.src = randomSong.url;
             audioPlayer.style.display = 'block';
-            audioPlayer.play();
+            audioPlayer.play().catch(e => {
+                currentAudioDisplay.textContent = "Error playing audio.";
+                currentAudioDisplay.style.color = 'var(--crimson)';
+            });
             
-            // Display info
             currentAudioDisplay.textContent = `Now playing: ${randomSong.name} (added ${randomSong.date})`;
             currentAudioDisplay.style.color = 'var(--paris-blue)';
             
-            // Add some fun animation to the button
             randomSongBtn.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 randomSongBtn.style.transform = '';
             }, 200);
         });
 
-        // Update song list display
+        // Update song list
         function updateSongList() {
             if (savedSongs.length === 0) {
-                songListDisplay.innerHTML = 'No songs yet. Upload some!';
+                songListDisplay.innerHTML = '<div style="color: rgba(254, 243, 199, 0.4);">No songs yet. Upload some!</div>';
                 return;
             }
             
-            let html = `<strong>Your Anthem Library (${savedSongs.length} songs):</strong><br>`;
+            let html = `<div style="margin-bottom: 10px; color: var(--paris-blue);">
+                           <strong>Your Anthem Library (${savedSongs.length} songs):</strong>
+                        </div>`;
+            
             savedSongs.forEach((song, index) => {
-                html += `${index + 1}. ${song.name}<br>`;
+                const sizeMB = song.size ? (song.size / (1024 * 1024)).toFixed(2) : '?';
+                html += `<div style="margin-bottom: 5px; padding: 5px; border-bottom: 1px solid rgba(198, 226, 255, 0.1);">
+                           ${index + 1}. ${song.name} 
+                           <span style="color: rgba(254, 243, 199, 0.4); font-size: 0.8rem;">
+                             (${sizeMB} MB, ${song.date})
+                           </span>
+                         </div>`;
             });
+            
             songListDisplay.innerHTML = html;
         }
 
-        // LOCK BUTTON ANIMATION
-        const lockBtn = document.querySelector('.lock-btn');
-        lockBtn.addEventListener('mouseenter', () => {
-            lockBtn.style.transform = 'scale(1.1) rotate(15deg)';
-        });
-        
-        lockBtn.addEventListener('mouseleave', () => {
-            lockBtn.style.transform = 'scale(1) rotate(0deg)';
-        });
+        // =====================
+        // EXPORT/IMPORT SYSTEM
+        // =====================
+        const DRIVE_FOLDER_ID = '1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN';
 
-        // AUTO-SAVE THOUGHTS EVERY 30 SECONDS
-        setInterval(() => {
-            const thoughts = thoughtsInput.value.trim();
-            if (thoughts && thoughts !== localStorage.getItem('advocate_thoughts')) {
-                localStorage.setItem('advocate_thoughts', thoughts);
-                savedThoughtsDisplay.textContent = thoughts;
+        // Export all data
+        document.getElementById('exportData').addEventListener('click', async () => {
+            try {
+                showNotification('🔄 Preparing export...', 'info');
+                const thoughts = await getThoughts();
+                const songs = await getAllSongs();
+                
+                const exportData = {
+                    version: 2,
+                    timestamp: new Date().toISOString(),
+                    exportDate: new Date().toLocaleString(),
+                    device: navigator.platform,
+                    thoughts: thoughts?.text || '',
+                    songs: songs.map(song => ({
+                        name: song.name,
+                        url: song.url,
+                        type: song.type,
+                        size: song.size,
+                        date: song.date
+                    }))
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `chronicles-backup-${Date.now()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showNotification('✅ Export complete! File downloaded.', 'success');
+                
+            } catch (error) {
+                console.error('Export error:', error);
+                showNotification('❌ Export failed', 'error');
             }
-        }, 30000);
+        });
 
-        // CONSOLE MESSAGE
-        console.log('%c🔓 Lock button leads to protected evidence', 'color: #fbbf24; font-size: 14px;');
-        console.log('%c💾 Thoughts auto-save every 30 seconds', 'color: #8b5cf6; font-size: 14px;');
-        console.log('%c🎵 Multiple MP3 upload + random play!', 'color: #c6e2ff; font-size: 14px; font-weight: bold;');
-        console.log('%c🎲 Click "Play Random Song" for surprise anthem!', 'color: #fbbf24; font-size: 14px;');
+        // Import data
+        document.getElementById('importData').addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json,application/json';
+            
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                showNotification('🔄 Importing data...', 'info');
+                
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    
+                    if (!data.version) throw new Error('Invalid backup file');
+                    
+                    // Import thoughts
+                    if (data.thoughts) {
+                        await saveThoughtsToDB(data.thoughts);
+                        thoughtsInput.value = data.thoughts;
+                        savedThoughtsDisplay.textContent = data.thoughts;
+                    }
+                    
+                    // Import songs
+                    if (data.songs && Array.isArray(data.songs)) {
+                        let importedCount = 0;
+                        for (const song of data.songs) {
+                            if (song.url) {
+                                await saveSongToDB({
+                                    name: song.name,
+                                    url: song.url,
+                                    type: song.type,
+                                    size: song.size,
+                                    date: song.date || new Date().toLocaleDateString(),
+                                    timestamp: Date.now()
+                                });
+                                importedCount++;
+                            }
+                        }
+                        savedSongs = await getAllSongs();
+                        updateSongList();
+                        showNotification(`✅ Imported ${importedCount} songs and thoughts!`, 'success');
+                    }
+                    
+                } catch (error) {
+                    console.error('Import error:', error);
+                    showNotification('❌ Import failed', 'error');
+                }
+            };
+            
+            input.click();
+        });
+
+        // Drive sync
+        document.getElementById('driveSyncBtn').addEventListener('click', () => {
+            showNotification(`
+                ☁️ <strong>Google Drive Sync:</strong><br><br>
+                1. First, <strong>EXPORT</strong> your data (📤 button)<br>
+                2. Go to your <a href="https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}" target="_blank">Chronicles Folder</a><br>
+                3. Upload the .json file<br>
+                4. On other devices: <strong>IMPORT</strong> the same file<br><br>
+                💡 Your data will appear on EVERY device!
+            `, 'drive');
+        });
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const existing = document.getElementById('syncNotification');
+            if (existing) existing.remove();
+            
+            const notification = document.createElement('div');
+            notification.id = 'syncNotification';
+            notification.innerHTML = `
+                <div style="position: fixed; top: 100px; right: 20px; 
+                            background: ${type === 'error' ? 'var(--crimson)' : 
+                                        type === 'success' ? '#10b981' : 
+                                        type === 'drive' ? '#4285f4' : 'var(--navy)'};
+                            color: white; padding: 20px; border-radius: 10px;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            z-index: 9999; max-width: 400px;
+                            border-left: 5px solid ${type === 'error' ? '#dc2626' : 
+                                              type === 'success' ? '#059669' : 
+                                              type === 'drive' ? '#34a853' : 'var(--gold)'};">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <div style="font-size: 1.5rem;">
+                            ${type === 'error' ? '❌' : 
+                             type === 'success' ? '✅' : 
+                             type === 'drive' ? '☁️' : 'ℹ️'}
+                        </div>
+                        <div style="flex: 1;">
+                            ${message}
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()" 
+                                style="background: none; border: none; color: white; 
+                                       cursor: pointer; font-size: 1.2rem;">×</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            if (type !== 'drive') {
+                setTimeout(() => {
+                    if (notification.parentNode) notification.remove();
+                }, 10000);
+            }
+        }
+
+        // =====================
+        // INITIALIZATION
+        // =====================
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initDB();
+            
+            // Auto-save thoughts every 30 seconds
+            setInterval(async () => {
+                const thoughts = thoughtsInput.value.trim();
+                if (thoughts) {
+                    try {
+                        await saveThoughtsToDB(thoughts);
+                    } catch (error) {
+                        console.error('Auto-save error:', error);
+                    }
+                }
+            }, 30000);
+            
+            // Chronicles link hover
+            const chroniclesLink = document.querySelector('.chronicles-link');
+            if (chroniclesLink) {
+                chroniclesLink.addEventListener('mouseenter', () => {
+                    chroniclesLink.style.transform = 'translateY(-5px)';
+                });
+                chroniclesLink.addEventListener('mouseleave', () => {
+                    chroniclesLink.style.transform = 'translateY(0)';
+                });
+            }
+            
+            // Lock button hover
+            const lockBtn = document.querySelector('.lock-btn');
+            if (lockBtn) {
+                lockBtn.addEventListener('mouseenter', () => {
+                    lockBtn.style.transform = 'scale(1.1) rotate(15deg)';
+                });
+                lockBtn.addEventListener('mouseleave', () => {
+                    lockBtn.style.transform = 'scale(1) rotate(0deg)';
+                });
+            }
+            
+            // Show sync instructions after 3 seconds
+            setTimeout(() => {
+                showNotification(`
+                    🔄 <strong>Cross-Device Sync Enabled!</strong><br><br>
+                    💾 <strong>To sync between devices:</strong><br>
+                    1. Click <strong>📤 EXPORT</strong> on this device<br>
+                    2. Save the .json file to Google Drive<br>
+                    3. On another device: Click <strong>📥 IMPORT</strong><br>
+                    4. Select the same file from Drive<br><br>
+                    📁 <a href="https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}" 
+                          target="_blank">
+                        Open Your Drive Folder
+                    </a>
+                `, 'drive');
+            }, 3000);
+            
+            console.log('📜 Chronicles loaded successfully');
+        });
     </script>
 </body>
 </html>
