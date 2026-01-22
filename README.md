@@ -1,4 +1,4 @@
-# <!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -116,6 +116,1181 @@
             font-size: 8rem;
             opacity: 0.1;
             z-index: 0;
+        }
+        
+        .advice-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--paris-blue);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .thoughts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .thoughts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .thoughts-input {
+            min-height: 150px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            color: var(--champagne);
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        
+        .thoughts-input:focus {
+            outline: none;
+            border-color: var(--crimson);
+            box-shadow: 0 0 0 3px rgba(155, 23, 77, 0.2);
+        }
+        
+        /* MULTI-SONG UPLOAD SECTION */
+        .multi-song-upload {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(198, 226, 255, 0.3);
+        }
+        
+        .mp3-title {
+            font-size: 1.1rem;
+            color: var(--paris-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mp3-title::before {
+            content: "🎵";
+        }
+        
+        .mp3-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(198, 226, 255, 0.2);
+            border-radius: 8px;
+            color: var(--champagne);
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        
+        .mp3-input::file-selector-button {
+            background: linear-gradient(45deg, var(--stonewall), var(--paris-blue));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* RANDOM SONG BUTTON */
+        .random-song-btn {
+            background: linear-gradient(45deg, var(--crimson), var(--gold));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .random-song-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 23, 77, 0.3);
+        }
+        
+        .random-song-btn::before {
+            content: "🎲";
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        #currentAudio {
+            margin-top: 10px;
+            color: rgba(254, 243, 199, 0.6);
+            font-size: 0.9rem;
+            min-height: 40px;
+        }
+        
+        .song-list {
+            margin-top: 15px;
+            max-height: 100px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: rgba(254, 243, 199, 0.6);
+        }
+        
+        /* BUTTONS */
+        .save-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .save-btn {
+            background: linear-gradient(45deg, var(--crimson), var(--stonewall));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 23, 77, 0.3);
+        }
+        
+        /* DISPLAY SAVED CONTENT */
+        .saved-content {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .saved-title {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .saved-title::before {
+            content: "📝";
+        }
+        
+        #savedThoughts {
+            color: rgba(254, 243, 199, 0.9);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            min-height: 50px;
+        }
+        
+        /* ADJECTIVES GRID */
+        .adjectives-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(251, 191, 36, 0.2);
+        }
+        
+        .adjectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .adjective-card {
+            background: linear-gradient(
+                145deg,
+                rgba(30, 41, 59, 0.7),
+                rgba(15, 23, 42, 0.9)
+            );
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .adjective-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .adjective-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(var(--crimson), var(--gold));
+        }
+        
+        .adjective-word {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--champagne);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .adjective-number {
+            color: var(--gold);
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-right: 10px;
+        }
+        
+        .receipt {
+            color: rgba(254, 243, 199, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(251, 191, 36, 0.3);
+        }
+        
+        /* CHRONICLES LINK SECTION */
+        .chronicles-section {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(251, 191, 36, 0.1);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chronicles-section::before {
+            content: "📜";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 8rem;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .chronicles-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--champagne);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-style: italic;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .chronicles-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            padding: 18px 45px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            background: linear-gradient(45deg, 
+                rgba(155, 23, 77, 0.1), 
+                rgba(139, 92, 246, 0.1));
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .chronicles-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: linear-gradient(45deg, 
+                rgba(155, 23, 77, 0.2), 
+                rgba(139, 92, 246, 0.2));
+            box-shadow: 0 10px 30px rgba(155, 23, 77, 0.2);
+        }
+        
+        .chronicles-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(251, 191, 36, 0.1), 
+                transparent);
+            transition: 0.6s;
+        }
+        
+        .chronicles-link:hover::before {
+            left: 100%;
+        }
+        
+        .chronicles-note {
+            color: rgba(254, 243, 199, 0.5);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            margin-top: 15px;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(251, 191, 36, 0.1);
+        }
+        
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin: 30px 0;
+        }
+        
+        .dreams {
+            color: rgba(254, 243, 199, 0.6);
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+        
+        .stonewall-note {
+            color: rgba(254, 243, 199, 0.4);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        /* NOTIFICATION STYLES */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        #syncNotification {
+            animation: slideIn 0.3s ease-out;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.5;
+        }
+        
+        #syncNotification a {
+            color: var(--gold) !important;
+            text-decoration: underline !important;
+            font-weight: bold;
+        }
+        
+        #syncNotification button {
+            transition: transform 0.2s ease;
+        }
+        
+        #syncNotification button:hover {
+            transform: scale(1.2);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .adjective-word { font-size: 1.8rem; }
+            .adjectives-grid { grid-template-columns: 1fr; }
+            .lock-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .advice-section {
+                padding: 25px;
+            }
+            .advice-title {
+                font-size: 2rem;
+            }
+            .chronicles-section {
+                padding: 40px 25px;
+            }
+            .chronicles-quote {
+                font-size: 1.5rem;
+            }
+            .chronicles-link {
+                font-size: 1.3rem;
+                padding: 15px 30px;
+            }
+            .save-buttons {
+                flex-direction: column;
+            }
+            .save-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOCK TRANSFER BUTTON -->
+    <div class="lock-transfer">
+        <a href="https://sasha11111112020292.github.io/newbeginning/index.html" 
+           target="_blank" 
+           class="lock-btn" 
+           title="Go to Protected Evidence">
+            🔒
+        </a>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1 class="title">Future Human Rights Advocate's Story</h1>
+        <p class="subtitle">Born June 28 · Stonewall 1969 · Still fighting in 2026</p>
+        <div class="symbols">🪶 ❤️ ⚖️</div>
+    </header>
+
+    <!-- ADVICE & MULTI-SONG SECTION -->
+    <section class="advice-section">
+        <h2 class="advice-title">Current Thoughts & Soundtrack</h2>
+        
+        <div class="thoughts-container">
+            <div>
+                <textarea class="thoughts-input" 
+                          id="thoughtsInput" 
+                          placeholder="Write your thoughts here... any advice, reflections, or things you need to remember. This is your space."></textarea>
+            </div>
+            
+            <div class="multi-song-upload">
+                <div class="mp3-title">Upload Multiple Anthems (MP3)</div>
+                <input type="file" 
+                       id="mp3Input" 
+                       class="mp3-input" 
+                       accept="audio/mpeg,audio/*"
+                       multiple>
+                <button class="random-song-btn" id="randomSongBtn">Play Random Song</button>
+                
+                <div class="song-list" id="songList"></div>
+                <div id="currentAudio"></div>
+                <audio controls class="audio-player" id="audioPlayer">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+        
+        <div class="save-buttons">
+            <button class="save-btn" id="saveThoughts">Save Thoughts</button>
+            <button class="save-btn" id="clearData" style="background: linear-gradient(45deg, var(--stonewall), var(--paris-blue));">
+                🗑️ Clear All Data
+            </button>
+            <!-- SYNC BUTTONS -->
+            <button class="save-btn" id="exportData" style="background: linear-gradient(45deg, #10b981, #059669);">
+                📤 Export ALL Data
+            </button>
+            <button class="save-btn" id="importData" style="background: linear-gradient(45deg, #f59e0b, #d97706);">
+                📥 Import Data
+            </button>
+            <button class="save-btn" id="driveSyncBtn" style="background: linear-gradient(45deg, #4285f4, #34a853);">
+                ☁️ Sync to Drive
+            </button>
+        </div>
+        
+        <div class="saved-content">
+            <div class="saved-title">Saved Thoughts</div>
+            <div id="savedThoughts"></div>
+        </div>
+    </section>
+
+    <!-- ADJECTIVES WITH RECEIPTS -->
+    <section class="adjectives-section">
+        <h2 class="section-title">15 Dimensions with Receipts</h2>
+        <div class="adjectives-grid" id="adjectivesGrid">
+            <!-- Adjectives will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- CHRONICLES ARCHIVE LINK -->
+    <section class="chronicles-section">
+        <div class="chronicles-quote">
+            "What must be remembered, shall be recorded. Evidence preserved is history reclaimed."
+        </div>
+        
+        <a href="chronicles.html" class="chronicles-link">
+            <span>📜</span>
+            Enter the Chronicles
+            <span style="font-size: 1.2rem; opacity: 0.7; margin-left: 10px;">→</span>
+        </a>
+        
+        <div class="chronicles-note">
+            A timeless archive of evidence, remembrance, and testament
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="signature">Yours truly, bisous</div>
+        <div style="font-size: 2rem; margin: 20px 0; color: var(--gold);">💋 😘</div>
+        <div class="dreams">
+            Paris at golden hour ✨ · Human Rights 🕊️ · Language School 🏫 · Love 💕
+        </div>
+        <div class="stonewall-note">
+            June 28, 1969 · Stonewall · 2026 · "C'est vraiment possible!"
+        </div>
+    </footer>
+
+    <script>
+        // =====================
+        // FIXED ADJECTIVES DATA
+        // =====================
+        const adjectivesData = [
+            {
+                number: 1,
+                word: "Resilient",
+                receipt: "Survived panic attacks in 2025-2026. Attended exam next morning after 9/10 toothache and suicidal ideation. Medical records confirm."
+            },
+            {
+                number: 2,
+                word: "Courageous",
+                receipt: "Confronted teacher with 26-source research paper debunking conversion therapy. Presented evidence that couldn't be ignored."
+            },
+            {
+                number: 3,
+                word: "Compassionate",
+                receipt: "Researched for a girl who fled to Berlin, compiling 26 sources for someone you never met. 'That's the real consequence.'"
+            },
+            {
+                number: 4,
+                word: "Strategic",
+                receipt: "Sent critical email Monday 9am — not Friday (she forgets), not evening (emotional). Peak professionalism, calculated timing."
+            },
+            {
+                number: 5,
+                word: "Loved",
+                receipt: "Mother: 'I believe in you more than I believe in myself sometimes.' Father drove an hour at 4 AM with suitcase when needed."
+            },
+            {
+                number: 6,
+                word: "Brilliant",
+                receipt: "'Smart Sasha' — highest score in the region. English teacher to your mom: 'He is so smart. I love him so much.'"
+            },
+            {
+                number: 7,
+                word: "Diplomatic",
+                receipt: "'Війни закінчують з повагою до суперника' — told to conversion therapy promoter. Gave teacher chance to save face."
+            },
+            {
+                number: 8,
+                word: "Visionary",
+                receipt: "Dreams of language school 'where people learn to find their voice, not just words.' Paris ✨ Human Rights 🕊️"
+            },
+            {
+                number: 9,
+                word: "Elegant",
+                receipt: "Crimson, navy, gold aesthetic. Premier Jour perfume. Hermès brand. 'Bisous' sign-offs. HTML pages with golden sparkles."
+            },
+            {
+                number: 10,
+                word: "Defiant",
+                receipt: "Born on Stonewall Day. Researched LGBTQ+ issues in conservative environment. 'fuck them all, you still look just as fine.'"
+            },
+            {
+                number: 11,
+                word: "Healing",
+                receipt: "Progress through therapy 2025-2026. Managed panic attacks with new coping skills. 'просити про допомогу — це не слабкість.'"
+            },
+            {
+                number: 12,
+                word: "Authentic",
+                receipt: "Psychiatrist: 'How is it not real if it hurts you so much?' Won't pretend to be someone else for anyone."
+            },
+            {
+                number: 13,
+                word: "Unbreakable",
+                receipt: "After panic attacks, 26-source paper, toothache, exam, psychiatric appointments — still here. Still writing. Still fighting."
+            },
+            {
+                number: 14,
+                word: "Dreamer",
+                receipt: "'Paris ✨, Human Rights 🕊️, Love 💕, Freedom 🦋, Joy ✨' — all while maintaining GPA."
+            },
+            {
+                number: 15,
+                word: "Unforgettable",
+                receipt: "Born Stonewall Day. 26-source conversion therapy exposé. Trilingual. Paris dreams. Human rights mission. The world won't forget."
+            }
+        ];
+
+        // =====================
+        // PERSISTENT STORAGE
+        // =====================
+        const DB_NAME = 'AdvocateArchiveDB';
+        const DB_VERSION = 1;
+        const AUDIO_STORE = 'audioFiles';
+        const THOUGHTS_STORE = 'thoughts';
+        
+        let db;
+        let savedSongs = [];
+
+        // Initialize IndexedDB
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                
+                request.onerror = () => {
+                    console.error('IndexedDB error:', request.error);
+                    loadFromLocalStorage();
+                    resolve(false);
+                };
+                
+                request.onsuccess = (event) => {
+                    db = event.target.result;
+                    console.log('IndexedDB initialized');
+                    loadAllData();
+                    resolve(true);
+                };
+                
+                request.onupgradeneeded = (event) => {
+                    db = event.target.result;
+                    if (!db.objectStoreNames.contains(AUDIO_STORE)) {
+                        const audioStore = db.createObjectStore(AUDIO_STORE, { keyPath: 'id', autoIncrement: true });
+                        audioStore.createIndex('name', 'name', { unique: false });
+                    }
+                    if (!db.objectStoreNames.contains(THOUGHTS_STORE)) {
+                        db.createObjectStore(THOUGHTS_STORE, { keyPath: 'id' });
+                    }
+                };
+            });
+        }
+
+        // Load all data
+        async function loadAllData() {
+            const thoughts = await getThoughts();
+            if (thoughts) {
+                thoughtsInput.value = thoughts.text || '';
+                savedThoughtsDisplay.textContent = thoughts.text || '';
+            }
+            
+            savedSongs = await getAllSongs();
+            updateSongList();
+        }
+
+        // Fallback to localStorage
+        function loadFromLocalStorage() {
+            const savedThoughts = localStorage.getItem('advocate_thoughts');
+            if (savedThoughts) {
+                thoughtsInput.value = savedThoughts;
+                savedThoughtsDisplay.textContent = savedThoughts;
+            }
+            
+            const songs = localStorage.getItem('advocate_songs');
+            if (songs) {
+                savedSongs = JSON.parse(songs) || [];
+                updateSongList();
+            }
+        }
+
+        // Save thoughts to DB
+        async function saveThoughtsToDB(text) {
+            if (!db) {
+                localStorage.setItem('advocate_thoughts', text);
+                return;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([THOUGHTS_STORE], 'readwrite');
+                const store = transaction.objectStore(THOUGHTS_STORE);
+                const request = store.put({ id: 'current_thoughts', text: text, timestamp: Date.now() });
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Get thoughts from DB
+        async function getThoughts() {
+            if (!db) {
+                const text = localStorage.getItem('advocate_thoughts');
+                return text ? { text } : null;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([THOUGHTS_STORE], 'readonly');
+                const store = transaction.objectStore(THOUGHTS_STORE);
+                const request = store.get('current_thoughts');
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Save song to DB
+        async function saveSongToDB(songData) {
+            if (!db) {
+                savedSongs.push(songData);
+                localStorage.setItem('advocate_songs', JSON.stringify(savedSongs));
+                return songData;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([AUDIO_STORE], 'readwrite');
+                const store = transaction.objectStore(AUDIO_STORE);
+                const request = store.add(songData);
+                request.onsuccess = () => {
+                    songData.id = request.result;
+                    resolve(songData);
+                };
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Get all songs from DB
+        async function getAllSongs() {
+            if (!db) {
+                const songs = localStorage.getItem('advocate_songs');
+                return songs ? JSON.parse(songs) : [];
+            }
+            
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([AUDIO_STORE], 'readonly');
+                const store = transaction.objectStore(AUDIO_STORE);
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // =====================
+        // DOM ELEMENTS
+        // =====================
+        const grid = document.getElementById('adjectivesGrid');
+        const thoughtsInput = document.getElementById('thoughtsInput');
+        const saveThoughtsBtn = document.getElementById('saveThoughts');
+        const savedThoughtsDisplay = document.getElementById('savedThoughts');
+        const clearDataBtn = document.getElementById('clearData');
+        const mp3Input = document.getElementById('mp3Input');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const currentAudioDisplay = document.getElementById('currentAudio');
+        const randomSongBtn = document.getElementById('randomSongBtn');
+        const songListDisplay = document.getElementById('songList');
+
+        // =====================
+        // RENDER ADJECTIVES
+        // =====================
+        adjectivesData.forEach(adj => {
+            const card = document.createElement('div');
+            card.className = 'adjective-card';
+            card.innerHTML = `
+                <div class="adjective-word">
+                    <span class="adjective-number">${adj.number}.</span>
+                    ${adj.word}
+                </div>
+                <div class="receipt">${adj.receipt}</div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // =====================
+        // THOUGHTS FUNCTIONALITY
+        // =====================
+        saveThoughtsBtn.addEventListener('click', async () => {
+            const thoughts = thoughtsInput.value.trim();
+            if (thoughts) {
+                try {
+                    await saveThoughtsToDB(thoughts);
+                    savedThoughtsDisplay.textContent = thoughts;
+                    
+                    const originalText = saveThoughtsBtn.textContent;
+                    saveThoughtsBtn.textContent = "Saved! ✓";
+                    saveThoughtsBtn.style.background = "linear-gradient(45deg, #10b981, #059669)";
+                    
+                    setTimeout(() => {
+                        saveThoughtsBtn.textContent = originalText;
+                        saveThoughtsBtn.style.background = "linear-gradient(45deg, var(--crimson), var(--stonewall))";
+                    }, 2000);
+                } catch (error) {
+                    alert('Error saving thoughts.');
+                }
+            }
+        });
+
+        // Clear all data
+        clearDataBtn.addEventListener('click', async () => {
+            if (confirm("Are you sure you want to clear ALL saved data? This cannot be undone.")) {
+                if (db) {
+                    const transaction = db.transaction([AUDIO_STORE, THOUGHTS_STORE], 'readwrite');
+                    transaction.objectStore(AUDIO_STORE).clear();
+                    transaction.objectStore(THOUGHTS_STORE).clear();
+                }
+                localStorage.clear();
+                savedSongs = [];
+                thoughtsInput.value = '';
+                savedThoughtsDisplay.textContent = '';
+                updateSongList();
+                alert("All data cleared.");
+            }
+        });
+
+        // =====================
+        // AUDIO FUNCTIONALITY
+        // =====================
+        mp3Input.addEventListener('change', async function(event) {
+            const files = Array.from(event.target.files);
+            let newSongsAdded = 0;
+            
+            for (const file of files) {
+                if (file && file.type.startsWith('audio/')) {
+                    if (file.size > 50 * 1024 * 1024) {
+                        alert(`File "${file.name}" is too large (max 50MB).`);
+                        continue;
+                    }
+                    
+                    try {
+                        const reader = new FileReader();
+                        const songData = await new Promise((resolve, reject) => {
+                            reader.onload = (e) => resolve({
+                                name: file.name,
+                                url: e.target.result,
+                                type: file.type,
+                                size: file.size,
+                                date: new Date().toLocaleDateString(),
+                                timestamp: Date.now()
+                            });
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        });
+                        
+                        await saveSongToDB(songData);
+                        savedSongs.push(songData);
+                        newSongsAdded++;
+                        
+                    } catch (error) {
+                        console.error('Error processing file:', error);
+                    }
+                }
+            }
+            
+            if (newSongsAdded > 0) {
+                updateSongList();
+                currentAudioDisplay.textContent = `Added ${newSongsAdded} new song(s)!`;
+                currentAudioDisplay.style.color = 'var(--gold)';
+                setTimeout(() => {
+                    currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
+                }, 2000);
+            }
+            
+            this.value = '';
+        });
+
+        // Play random song
+        randomSongBtn.addEventListener('click', () => {
+            if (savedSongs.length === 0) {
+                currentAudioDisplay.textContent = "No songs uploaded yet!";
+                currentAudioDisplay.style.color = 'var(--crimson)';
+                setTimeout(() => {
+                    currentAudioDisplay.style.color = 'rgba(254, 243, 199, 0.6)';
+                }, 3000);
+                return;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * savedSongs.length);
+            const randomSong = savedSongs[randomIndex];
+            
+            audioPlayer.src = randomSong.url;
+            audioPlayer.style.display = 'block';
+            audioPlayer.play().catch(e => {
+                currentAudioDisplay.textContent = "Error playing audio.";
+                currentAudioDisplay.style.color = 'var(--crimson)';
+            });
+            
+            currentAudioDisplay.textContent = `Now playing: ${randomSong.name} (added ${randomSong.date})`;
+            currentAudioDisplay.style.color = 'var(--paris-blue)';
+            
+            randomSongBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                randomSongBtn.style.transform = '';
+            }, 200);
+        });
+
+        // Update song list
+        function updateSongList() {
+            if (savedSongs.length === 0) {
+                songListDisplay.innerHTML = '<div style="color: rgba(254, 243, 199, 0.4);">No songs yet. Upload some!</div>';
+                return;
+            }
+            
+            let html = `<div style="margin-bottom: 10px; color: var(--paris-blue);">
+                           <strong>Your Anthem Library (${savedSongs.length} songs):</strong>
+                        </div>`;
+            
+            savedSongs.forEach((song, index) => {
+                const sizeMB = song.size ? (song.size / (1024 * 1024)).toFixed(2) : '?';
+                html += `<div style="margin-bottom: 5px; padding: 5px; border-bottom: 1px solid rgba(198, 226, 255, 0.1);">
+                           ${index + 1}. ${song.name} 
+                           <span style="color: rgba(254, 243, 199, 0.4); font-size: 0.8rem;">
+                             (${sizeMB} MB, ${song.date})
+                           </span>
+                         </div>`;
+            });
+            
+            songListDisplay.innerHTML = html;
+        }
+
+        // =====================
+        // EXPORT/IMPORT SYSTEM
+        // =====================
+        const DRIVE_FOLDER_ID = '1kcHmkUSNuirFBFuSKRZ4GiEH9z54f2iN';
+
+        // Export all data
+        document.getElementById('exportData').addEventListener('click', async () => {
+            try {
+                showNotification('🔄 Preparing export...', 'info');
+                const thoughts = await getThoughts();
+                const songs = await getAllSongs();
+                
+                const exportData = {
+                    version: 2,
+                    timestamp: new Date().toISOString(),
+                    exportDate: new Date().toLocaleString(),
+                    device: navigator.platform,
+                    thoughts: thoughts?.text || '',
+                    songs: songs.map(song => ({
+                        name: song.name,
+                        url: song.url,
+                        type: song.type,
+                        size: song.size,
+                        date: song.date
+                    }))
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `chronicles-backup-${Date.now()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showNotification('✅ Export complete! File downloaded.', 'success');
+                
+            } catch (error) {
+                console.error('Export error:', error);
+                showNotification('❌ Export failed', 'error');
+            }
+        });
+
+        // Import data
+        document.getElementById('importData').addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json,application/json';
+            
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                showNotification('🔄 Importing data...', 'info');
+                
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    
+                    if (!data.version) throw new Error('Invalid backup file');
+                    
+                    // Import thoughts
+                    if (data.thoughts) {
+                        await saveThoughtsToDB(data.thoughts);
+                        thoughtsInput.value = data.thoughts;
+                        savedThoughtsDisplay.textContent = data.thoughts;
+                    }
+                    
+                    // Import songs
+                    if (data.songs && Array.isArray(data.songs)) {
+                        let importedCount = 0;
+                        for (const song of data.songs) {
+                            if (song.url) {
+                                await saveSongToDB({
+                                    name: song.name,
+                                    url: song.url,
+                                    type: song.type,
+                                    size: song.size,
+                                    date: song.date || new Date().toLocaleDateString(),
+                                    timestamp: Date.now()
+                                });
+                                importedCount++;
+                            }
+                        }
+                        savedSongs = await getAllSongs();
+                        updateSongList();
+                        showNotification(`✅ Imported ${importedCount} songs and thoughts!`, 'success');
+                    }
+                    
+                } catch (error) {
+                    console.error('Import error:', error);
+                    showNotification('❌ Import failed', 'error');
+                }
+            };
+            
+            input.click();
+        });
+
+        // Drive sync
+        document.getElementById('driveSyncBtn').addEventListener('click', () => {
+            showNotification(`
+                ☁️ <strong>Google Drive Sync:</strong><br><br>
+                1. First, <strong>EXPORT</strong> your data (📤 button)<br>
+                2. Go to your <a href="https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}" target="_blank">Chronicles Folder</a><br>
+                3. Upload the .json file<br>
+                4. On other devices: <strong>IMPORT</strong> the same file<br><br>
+                💡 Your data will appear on EVERY device!
+            `, 'drive');
+        });
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const existing = document.getElementById('syncNotification');
+            if (existing) existing.remove();
+            
+            const notification = document.createElement('div');
+            notification.id = 'syncNotification';
+            notification.innerHTML = `
+                <div style="position: fixed; top: 100px; right: 20px; 
+                            background: ${type === 'error' ? 'var(--crimson)' : 
+                                        type === 'success' ? '#10b981' : 
+                                        type === 'drive' ? '#4285f4' : 'var(--navy)'};
+                            color: white; padding: 20px; border-radius: 10px;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            z-index: 9999; max-width: 400px;
+                            border-left: 5px solid ${type === 'error' ? '#dc2626' : 
+                                              type === 'success' ? '#059669' : 
+                                              type === 'drive' ? '#34a853' : 'var(--gold)'};">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <div style="font-size: 1.5rem;">
+                            ${type === 'error' ? '❌' : 
+                             type === 'success' ? '✅' : 
+                             type === 'drive' ? '☁️' : 'ℹ️'}
+                        </div>
+                        <div style="flex: 1;">
+                            ${message}
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()" 
+                                style="background: none; border: none; color: white; 
+                                       cursor: pointer; font-size: 1.2rem;">×</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            if (type !== 'drive') {
+                setTimeout(() => {
+                    if (notification.parentNode) notification.remove();
+                }, 10000);
+            }
+        }
+
+        // =====================
+        // INITIALIZATION
+        // =====================
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initDB();
+            
+            // Auto-save thoughts every 30 seconds
+            setInterval(async () => {
+                const thoughts = thoughtsInput.value.trim();
+                if (thoughts) {
+                    try {
+                        await saveThoughtsToDB(thoughts);
+                    } catch (error) {
+                        console.error('Auto-save error:', error);
+                    }
+                }
+            }, 30000);
+            
+            // Chronicles link hover
+            const chroniclesLink = document.querySelector('.chronicles-link');
+            if (chroniclesLink) {
+                chroniclesLink.addEventListener('mouseenter', () => {
+                    chroniclesLink.style.transform = 'translateY(-5px)';
+                });
+                chroniclesLink.addEventListener('mouseleave', () => {
+                    chroniclesLink.style.transform = 'translateY(0)';
+                });
+            }
+            
+            // Lock button hover
+            const lockBtn = document.querySelector('.lock-btn');
+            if (lockBtn) {
+                lockBtn.addEventListener('mouseenter', () => {
+                    lockBtn.style.transform = 'scale(1.1) rotate(15deg)';
+                });
+                lockBtn.addEventListener('mouseleave', () => {
+                    lockBtn.style.transform = 'scale(1) rotate(0deg)';
+                });
+            }
+            
+            // Show sync instructions after 3 seconds
+            setTimeout(() => {
+                showNotification(`
+                    🔄 <strong>Cross-Device Sync Enabled!</strong><br><br>
+                    💾 <strong>To sync between devices:</strong><br>
+                    1. Click <strong>📤 EXPORT</strong> on this device<br>
+                    2. Save the .json file to Google Drive<br>
+                    3. On another device: Click <strong>📥 IMPORT</strong><br>
+                    4. Select the same file from Drive<br><br>
+                    📁 <a href="https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}" 
+                          target="_blank">
+                        Open Your Drive Folder
+                    </a>
+                `, 'drive');
+            }, 3000);
+            
+            console.log('📜 Chronicles loaded successfully');
+        });
+    </script>
+</body>
+</html>    z-index: 0;
         }
         
         .advice-title {
